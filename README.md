@@ -4,7 +4,7 @@
 > multiple chains .Using one server and client you can install any EVM
 > chain multiple chains same time.
 
-## Blockgum Setup on Fresh Ubuntu 20 setup
+## Blockgum Setup on Fresh Ubuntu 18/20/22 setup
 
     cd /opt/ && wget https://blockgum.com/downloads/bg_setup.sh && chmod +x bg_setup.sh && ./bg_setup.sh
 
