@@ -1,15 +1,19 @@
-> EVM stands for Ethereum Virtual Machine, and there are over 600+ Known
-> EVM chains including ETH, BNB, MATIC, FTM, and many more.
+## What is BlockGum ?
 
-These networks support smart contracts like ERC20, ERC721, and ERC1155. Here ERC stands for Ethereum Request for Comment. These standards have especially ERC20 been dominant & helpful in Creating Tokens in Cryptocurrency networks. Tokens have been quite popular in There have been an increasing number of tokens in multiples of thousands.
+>  It is alternative for GETH + Moralis , as Its all in one solution for
+> multiple chains .Using one server and client you can install any EVM
+> chain multiple chains same time.
 
-ICOs stands for Initial Coin Offering or IEO ie Initial Exchange Offerings have used tokens in their ECO system.
+## Blockgum Setup on Fresh Ubuntu 20 setup
 
-Most exchanges nowadays support **EVM Wallet** and their tokens. To support tokens Developer use Either GETH [ Go Ethereum Client], Or use Hdwallet+ [Moralis or Other Public APIs]
+    cd /opt/ && wget https://blockgum.com/downloads/bg_setup.sh && chmod +x bg_setup.sh && ./bg_setup.sh
 
-## Known Issues with Geth.
+## Apk Download for Mobile
+https://blockgum.com/blockgum.apk
 
-  
+
+
+## Known Issues with Geth.  
 
 1.  Security: Geth itself isn't protected by nature, Additional security like NGINX or a firewall is required.
     
@@ -36,11 +40,6 @@ Most exchanges nowadays support **EVM Wallet** and their tokens. To support toke
     
 4.  Funds movement: Funds can not be auto-moved to a specific account.
     
-
-  
-
-  
-
 Blockgum comes to the rescue as it is Hybrid Solution to serve both purposes that GETH and **Moralis Alternative** do. Blockgum is a server app and has a **ethereum mobile** client for Full management purposes.
 
   
@@ -58,18 +57,6 @@ Blockgum Supports Major EVM APIs + It has a set of own useful APIs which are mis
   
 
 Blockgum is also a Ethereum Deposit Tool ie does ETH Deposit Tracking for multiple chains for Main coin and their tokens, It can be used for **ETH Wallet** , **BNB Wallet** or Any EVM Wallet purposes for your all custom accounts.
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 -   **Multichain Wallet https://blockgum.com/chains**
     
@@ -150,4 +137,5 @@ For more information, check out the video at to see how easy it is to install Bl
 ## Blockgum Mobile Video
 
 [https://www.youtube.com/watch?v=jaL4HY-MASw](https://www.youtube.com/watch?v=jaL4HY-MASw)
+
 
