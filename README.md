@@ -6,7 +6,7 @@
 
 ## Blockgum Setup via github [required Fresh Ubuntu 18/20/22 ]
 
-    cd /opt/ && wget https://github.com/blockgum/blockgum/releases/download/v1.0.2/bg_git_setup.sh && chmod +x bg_git_setup.sh && ./bg_git_setup.sh
+    cd /opt/ && wget https://github.com/blockgum/blockgum/releases/download/v1.0.2/setup.sh && chmod +x setup.sh && ./setup.sh
 
 
 ## Apk Download for Mobile
