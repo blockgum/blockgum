@@ -12,6 +12,15 @@
 ## Apk Download for Mobile
 https://blockgum.com/blockgum.apk
 
+# What improves the performance of RPC public nodes ?
+
+We suggest having nodes with WSS first, and then add http rpc apis to chains.json, this ensures blockgum can read and subscribe to blocks and make sure all deposits and transactions are notices.
+
+Some of Free but premium node provides that you can add 
+
+1. getblock.io
+2. infura.io
+3. nodereal.io
 
 
 ## Known Issues with Geth.  
