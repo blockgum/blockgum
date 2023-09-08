@@ -1,13 +1,6 @@
-sudo apt update &&
-  sudo apt install gnupg -y &&
-  sudo apt install unzip -y &&
-  sudo apt update &&
-  wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
-  sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
-  rm -rf libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
-  release=$(lsb_release -a 2>/dev/null) &&
+release=$(lsb_release -a 2>/dev/null) &&
   if echo "$release" | grep -q -w "jammy"; then
-    codename="jammy"
+    sudo sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf && codename="jammy"
   elif echo "$release" | grep -q -w "focal"; then
     codename="focal"
   elif echo "$release" | grep -q -w "bionic"; then
@@ -17,16 +10,23 @@ sudo apt update &&
   else
     codename="jammy"
   fi &&
+  sudo apt update &&
+  sudo apt install gnupg -y &&
+  sudo apt install unzip -y &&
+  sudo apt update &&
+  wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
+  sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
+  rm -rf libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
   wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add - &&
   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list &&
   sudo apt update &&
+  sudo mkdir -p /data/db &&
   sudo apt install -y mongodb-org &&
   sudo systemctl enable mongod &&
   sudo service mongod start &&
-  touch /tmp/mongodb-27017.sock &&
-  sudo rm -rf /tmp/mongodb-27017.sock &&
-  sudo service mongod start &&
-  sudo mongod --bind_ip localhost &&
+  sudo touch /tmp/mongodb-27017.sock &&
+  sudo chown -R mongodb:mongodb /var/lib/mongodb && 
+  sudo chown mongodb:mongodb /tmp/mongodb-27017.sock &&
   sudo systemctl restart mongod &&
   sudo useradd -m blockgum &&
   cd /home/blockgum &&
