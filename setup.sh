@@ -1,15 +1,32 @@
-release=$(lsb_release -a 2>/dev/null) &&
-  if echo "$release" | grep -q -w "jammy"; then
+#!/bin/bash
+
+# Fetch release information
+release=$(lsb_release -a 2>/dev/null)
+
+# Check for 'jammy' and update the needrestart configuration if the file exists
+if echo "$release" | grep -q -w "jammy"; then
+  if [ -f /etc/needrestart/needrestart.conf ]; then
     sudo sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf && codename="jammy"
-  elif echo "$release" | grep -q -w "focal"; then
-    codename="focal"
-  elif echo "$release" | grep -q -w "bionic"; then
-    codename="bionic"
-  elif echo "$release" | grep -q -w "xenial"; then
-    codename="xenial"
+    echo "needrestart configuration updated for jammy."
   else
-    codename="jammy"
-  fi &&
+    echo "needrestart.conf not found. Attempting to install needrestart."
+    sudo apt-get update && sudo apt-get install -y needrestart
+    if [ -f /etc/needrestart/needrestart.conf ]; then
+      sudo sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
+    else
+      echo "Installation failed or needrestart.conf still not found."
+      exit 1
+    fi
+  fi
+elif echo "$release" | grep -q -w "focal"; then
+  codename="focal"
+elif echo "$release" | grep -q -w "bionic"; then
+  codename="bionic"
+elif echo "$release" | grep -q -w "xenial"; then
+  codename="xenial"
+else
+  codename="jammy"
+fi&&
   sudo apt update &&
   sudo apt install gnupg -y &&
   sudo apt install unzip -y &&
