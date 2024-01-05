@@ -9,9 +9,23 @@
 cd /opt/ && curl -sSL https://raw.githubusercontent.com/blockgum/blockgum/main/setup.sh -o setup.sh && chmod +x setup.sh && ./setup.sh
 ```
 
-## Apk Download for Mobile
-https://blockgum.com/blockgum.apk
+## Client Libraries
+We've expanded our ecosystem with two new client libraries:
 
+- **PHP BlockGum:** [Blockgum PHP Client](https://github.com/blockgum/php-blockgum) - A robust PHP library for integrating Blockgum into your PHP-based applications.
+- **Blockgum JS:** [Blockgum Node.js Client](https://github.com/blockgum/blockgum-js) - Leverage the flexibility of Node.js in your projects with our dedicated Blockgum JS library.
+
+## Getting Started
+- **Installation:** Set up Blockgum with ease using our installation tool using CLI command above.
+- **Mobile App:** Download the Blockgum mobile app from [Blockgum Mobile](https://blockgum.com/blockgum.apk).
+- **Useful Links:** 
+  - [Multichain Wallet](https://blockgum.com/chains) and for chains.json generation [https://blockgum.com/generate]
+  - [Ethereum Wallet](https://blockgum.com)
+
+## Additional Resources
+- **Installation Video:** Watch our installation guide on [YouTube](https://www.youtube.com/watch?v=6qBnSG80rVQ).
+- **Mobile App Overview:** Get a glimpse of our mobile app [here](https://www.youtube.com/watch?v=jaL4HY-MASw).
+- 
 # What improves the performance of RPC public nodes ?
 
 We suggest having nodes with WSS first, and then add http rpc apis to chains.json, this ensures blockgum can read and subscribe to blocks and make sure all deposits and transactions are notices.
