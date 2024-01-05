@@ -25,7 +25,7 @@ We've expanded our ecosystem with two new client libraries:
 ## Additional Resources
 - **Installation Video:** Watch our installation guide on [YouTube](https://www.youtube.com/watch?v=6qBnSG80rVQ).
 - **Mobile App Overview:** Get a glimpse of our mobile app [here](https://www.youtube.com/watch?v=jaL4HY-MASw).
-- 
+  
 # What improves the performance of RPC public nodes ?
 
 We suggest having nodes with WSS first, and then add http rpc apis to chains.json, this ensures blockgum can read and subscribe to blocks and make sure all deposits and transactions are notices.
