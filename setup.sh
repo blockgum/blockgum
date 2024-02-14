@@ -34,8 +34,12 @@ fi&&
   wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
   sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
   rm -rf libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&
-  wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add - &&
-  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list &&
+  #wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add - &&
+  sudo apt-get install gnupg curl &&
+  curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \
+   --dearmor &&
+  echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list &&
   sudo apt update &&
   sudo mkdir -p /data/db &&
   sudo apt install -y mongodb-org &&
