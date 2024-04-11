@@ -162,4 +162,8 @@ For more information, check out the video at to see how easy it is to install Bl
 
 [https://www.youtube.com/watch?v=jaL4HY-MASw](https://www.youtube.com/watch?v=jaL4HY-MASw)
 
+## Blockgum Upgrade to latest Version 
+```
+cd /opt/ && curl -sSL https://raw.githubusercontent.com/blockgum/blockgum/main/upgrade.sh -o upgrade.sh && chmod +x upgrade.sh && ./upgrade.sh
+```
 
