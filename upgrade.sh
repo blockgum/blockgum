@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# Introduction and confirmation prompt
+# Introduction and check if Blockgum is installed
+echo "Checking if Blockgum is installed..."
+
+if [ ! -d "/home/blockgum" ]; then
+    echo "Blockgum is not currently installed. Please check the installation."
+    exit 1
+fi
+
+echo "Blockgum installation found."
+
+# Confirmation prompt
 echo "This script will upgrade the Blockgum software."
 echo "It will perform the following actions:"
 echo "1. Stop the blockgum service."
