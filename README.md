@@ -18,6 +18,8 @@ We've expanded our ecosystem with two new client libraries:
 ## Getting Started
 - **Installation:** Set up Blockgum with ease using our installation tool using CLI command above.
 - **Mobile App:** Download the Blockgum mobile app from [Blockgum Mobile](https://blockgum.com/blockgum.apk).
+- **Windows Client App[Beta]:** Download the Blockgum Windows Client app from [Blockgum Windows Client](https://blockgum.com/blockgum_client_win_0.0.1.exe). This client does not have QR Scan , Paste URL and JWT directly.
+
 - **Useful Links:** 
   - [Multichain Wallet](https://blockgum.com/chains) and for chains.json generation [https://blockgum.com/generate]
   - [Ethereum Wallet](https://blockgum.com)
