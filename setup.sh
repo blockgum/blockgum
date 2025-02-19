@@ -3,7 +3,7 @@
 # Fetch the codename of the release
 codename=$(lsb_release -cs)
 
-# Update needrestart configuration based on codename
+# Update needrestart configuration based on codename, including noble
 case $codename in
   bionic|focal|jammy|kinetic|lunar|noble)
     if [ -f /etc/needrestart/needrestart.conf ]; then
@@ -26,9 +26,17 @@ case $codename in
     ;;
 esac
 
+# Determine MongoDB version based on Ubuntu codename.
+# Use MongoDB 8.0 for noble; default to 7.0 for others.
+if [ "$codename" == "noble" ]; then
+  mongodb_version="8.0"
+else
+  mongodb_version="7.0"
+fi
+
 # General system update
 sudo apt update
-sudo apt install -y gnupg unzip
+sudo apt install -y gnupg unzip curl
 
 # Download and install specific OpenSSL package if necessary
 wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
@@ -36,9 +44,8 @@ sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
 # Install MongoDB
-sudo apt-get install -y curl
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
-echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+curl -fsSL https://www.mongodb.org/static/pgp/server-${mongodb_version}.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-${mongodb_version}.gpg
+echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-${mongodb_version}.gpg] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/${mongodb_version} multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-${mongodb_version}.list
 sudo apt update
 sudo apt install -y mongodb-org
 sudo systemctl enable mongod
@@ -53,18 +60,24 @@ sudo systemctl restart mongod
 
 # Configure Blockgum application
 sudo useradd -m blockgum
-cd /home/blockgum
-wget -q $(curl -s https://api.github.com/repos/blockgum/blockgum/releases/latest | grep "browser_download_url.*zip" | cut -d '"' -f 4)
+cd /home/blockgum || exit
+
+# Download the latest release of Blockgum from GitHub
+wget -q "$(curl -s https://api.github.com/repos/blockgum/blockgum/releases/latest | grep "browser_download_url.*zip" | cut -d '"' -f 4)" -O bg_latest.zip
 unzip bg_latest.zip
+
+# Install and configure nginx
 sudo apt install -y nginx
-cp ./Tools/blockgum-nginx.conf /etc/nginx/conf.d/
-cp ./Tools/status.json /etc/nginx/
+sudo cp ./Tools/blockgum-nginx.conf /etc/nginx/conf.d/
+sudo cp ./Tools/status.json /etc/nginx/
 sudo service nginx reload
 
-# Make executable and set up service
+# Make Blockgum executables executable and set up its systemd service
 chmod +x bg_mongo_linux bg_wallet_linux bg_utils_linux startchains.sh
-cp ./Tools/blockgum.service /etc/systemd/system
-systemctl daemon-reload
-systemctl enable blockgum.service
-systemctl start blockgum.service
+sudo cp ./Tools/blockgum.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable blockgum.service
+sudo systemctl start blockgum.service
+
+# Start Blockgum utilities
 ./bg_utils_linux
