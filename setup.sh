@@ -5,7 +5,7 @@ codename=$(lsb_release -cs)
 
 # Update needrestart configuration based on codename
 case $codename in
-  bionic|focal|jammy|kinetic|lunar)
+  bionic|focal|jammy|kinetic|lunar|noble)
     if [ -f /etc/needrestart/needrestart.conf ]; then
       sudo sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
       echo "needrestart configuration updated for $codename."
